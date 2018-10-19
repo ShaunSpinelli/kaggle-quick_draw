@@ -29,10 +29,13 @@ def draw_it(raw_strokes):
 def create_images(drawings, save_dir):
     #need to create save dir
 	save_dir.mkdir(parents=True, exist_ok=True)
-	print("making images")
+	x = 0
 	for key, value in drawings.items():
-		img = draw_it(value)
-		img.save(save_dir/str(key), "jpeg")
+          while x > 200:
+              img = draw_it(value)
+                    name = str(key)+".jpeg"
+		    img.save(save_dir/name), "jpeg")
+                    x = x + 1
 		# df = pd.DataFrame(value)
 		# df.to_csv(save_dir/str(key))
 		# print(f'Saving Image {key}')
@@ -91,7 +94,7 @@ def process_files(files ,save_dir):
 		start = time.time()
 		name = file.name[:-4]
 		print(f'processing {name}')
-		process_csv(file, name , Path(save_dir))
+		process_csv(file, name , Path(save_dir)/name)
 		end = time.time()
 		print(f'time took: {end-start}')
 
@@ -112,7 +115,7 @@ def main(path, save_dir):
 #     #need iterate through data dir and make list of classes
 if __name__ == '__main__':
 
-    main("data", "images")
+    main("raw_data", "images")
 
 
 
