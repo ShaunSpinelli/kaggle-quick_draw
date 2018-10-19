@@ -26,21 +26,30 @@ def draw_it(raw_strokes):
     return image.convert('RGB') # maybe just return an image?
 
 
-def create_images(drawings, save_dir):
-    #need to create save dir
-	save_dir.mkdir(parents=True, exist_ok=True)
-	x = 0
-	for key, value in drawings.items():
-          while x > 200:
-              img = draw_it(value)
-                    name = str(key)+".jpeg"
-		    img.save(save_dir/name), "jpeg")
-                    x = x + 1
-		# df = pd.DataFrame(value)
-		# df.to_csv(save_dir/str(key))
+# def create_images(drawings, save_dir):
+#     #need to create save dir
+# 	save_dir.mkdir(parents=True, exist_ok=True)
+#     # x = 0
+#     for key, value in drawings.items():
+#         while x > 200:
+#             img = draw_it(value)
+#             name = str(key)+".jpeg"
+#             img.save(save_dir/name), "jpeg")
+#             x = x + 1
+# 		# df = pd.DataFrame(value)
+# 		# df.to_csv(save_dir/str(key))
 		# print(f'Saving Image {key}')
 
 
+def create_images(drawings,save_dir):
+    save_dir.mkdir(parents=True, exist_ok=True)
+    x = 0
+    for key, value in drawings.items():
+        while x > 200:
+            img = draw_it(value)
+            name = str(key)+".jpeg"
+            img.save(save_dir/name, "jpeg")
+            x = x + 1
 
 
 def get_drawings(df):
