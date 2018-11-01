@@ -20,6 +20,7 @@ def split(files, size=0.8):
     return train, valid
 
 def move_files(files, new):
+    print("Moving Files")
     new.mkdir(exist_ok=True, parents=True)
     for file in files:
         move(file, new/file.name)
