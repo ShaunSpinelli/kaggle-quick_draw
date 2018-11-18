@@ -35,6 +35,10 @@ def split_classes(files):
 
 
 def main(data_dir):
+    """splits up images data set
+    args:
+      data_dir type:Path         
+    """
     files = get_files(data_dir)
     split_classes(files)
     # print(files)

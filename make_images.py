@@ -68,8 +68,8 @@ def process_csv(csv_path, name, save_dir):
 def get_file_names(path):
    return [ i  for i in Path(path).iterdir()]
 
-def process_files(files ,):
-    save_dir="images"
+def process_files(files ,save_dir):
+    #save_dir="images"
     for file in files:
     	start = time.time()
     	name = file.name[:-4]
@@ -89,12 +89,12 @@ def process_files(files ,):
 def main(path, save_dir):
     files = get_file_names(path)
     # with ThreadPoolExecutor(12) as e: e.map(process_files, iter(files))
-    process_files(files, )#save_dir=images)
+    process_files(files, save_dir)
 
 #     #need iterate through data dir and make list of classes
 if __name__ == '__main__':
 
-    main("data", "images")
+    main("/home/ubuntu/data/raw_data", "/home/ubuntu/data/images")
 
 
 
