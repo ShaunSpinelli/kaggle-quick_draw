@@ -1,2 +1,4 @@
 data
 fastai
+.cache
+__pycache__
