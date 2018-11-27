@@ -5,7 +5,7 @@ import numpy as np
 from PIL import Image, ImageDraw
 from pathlib import Path
 import argparse
-# from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor
 
 
 def draw_it(raw_strokes):
@@ -22,9 +22,9 @@ def draw_it(raw_strokes):
                             fill=0, width=6)
 
     # image
-    # small_img = image.resize((31,31))/
+    small_img = image.resize((128,128))
     # return small_img
-    return np.array(image) # maybe just return an image?
+    return np.array(small_img) # maybe just return an image?
 
 
 def create_images(drawings,save_dir):
@@ -41,7 +41,7 @@ def get_drawings(df):
 	# print("Creating Dict")
 	print("creating dict")
 	col = ['key_id','drawing' ]
-	df = df[col].head(n=1000) #only process 1000 images
+	df = df[col] #.head(n=1000) #only process 1000 images
 	df = df.set_index('key_id').to_dict()
 	return df["drawing"]
 
@@ -49,7 +49,7 @@ def get_drawings(df):
 def process_csv(csv_path, name, save_dir):
     df = pd.read_csv(csv_path)
     drawings = get_drawings(df)
-
+    print("making images")
     create_images(drawings, save_dir)
 
 def get_file_names(path):
@@ -63,7 +63,7 @@ def process_files(files ,save_dir):
     	print(f'processing {name}')
     	process_csv(file, name , Path(save_dir)/name)
     	end = time.time()
-    	print(f'time took: {end-start}')
+    	print(f'time took: {(end-start)/60} min')
 
 
 # def process_files(files, save_dir):
@@ -75,7 +75,7 @@ def process_files(files ,save_dir):
 
 def main(path, save_dir):
     files = get_file_names(path)
-    # with ThreadPoolExecutor(12) as e: e.map(process_files, iter(files))
+    # with ThreadPoolExecutor(2) as e: e.map(process_files, files)
     process_files(files, save_dir)
 
 #     #need iterate through data dir and make list of classes
