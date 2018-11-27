@@ -41,7 +41,11 @@ def get_drawings(df):
 	# print("Creating Dict")
 	print("creating dict")
 	col = ['key_id','drawing' ]
+<<<<<<< HEAD
 	df = df[col] #.head(n=1000) #only process 1000 images
+=======
+	df = df[col]#.head(n=1000) #only process 1000 images
+>>>>>>> 838d89625afce348163369bf39626530333b5557
 	df = df.set_index('key_id').to_dict()
 	return df["drawing"]
 
